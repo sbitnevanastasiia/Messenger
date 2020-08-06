@@ -12,7 +12,7 @@ messages = [
 def send():
     name = request.json.get('name')
     text = request.json.get('text')
-    if not name or isinstance(name,str) or not text or isinstance(text,str):
+    if not name or not isinstance(name,str) or not text or not isinstance(text,str):
         return Response(status=400)
     message = {'name': name, 'time': time.time(), 'text': text}
     messages.append(message)
@@ -44,8 +44,17 @@ def hello():
 
 @app.route("/status")
 def status():
+    usersName = []
+    for message in messages:
+        if message['name']:
+            usersName.append(message['name'])
+    uniqName = set(usersName)
     return {
-        "status": True, "name": 'Name', "time": time.time()
+        "status": True, 
+        "name": 'Name', 
+        "time": time.time(),
+        "messages": len(messages),
+        "users": len(uniqName)
     }
 
 app.run()
