@@ -4,12 +4,12 @@ import time
 app = Flask(__name__)
 
 messages = [
-    {'name': 'Dima', 'time': time.time(), 'text': 'Hello'},
-    {'name': 'Kostya', 'time': time.time(), 'text': 'Hi'}
+    #{'name': 'Dima', 'time': time.time(), 'text': 'Hello'},
+    #{'name': 'Kostya', 'time': time.time(), 'text': 'Hi'}
 ]
 
 @app.route("/send", methods=['POST'])
-def send():
+def send(): 
     name = request.json.get('name')
     text = request.json.get('text')
     if not name or not isinstance(name,str) or not text or not isinstance(text,str):
